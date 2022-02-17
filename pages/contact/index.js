@@ -1,7 +1,12 @@
+import { Fragment } from "react";
+import ContactContent from "../../components/Contact/ContactContent";
+
 const ContactPage = () => {
-    return (
-        <h1>This is contact page</h1>
-    )
-}
+  return (
+    <Fragment>
+      <ContactContent />
+    </Fragment>
+  );
+};
 
 export default ContactPage;

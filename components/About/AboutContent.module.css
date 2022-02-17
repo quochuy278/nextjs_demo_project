@@ -1,0 +1,17 @@
+.container {
+    margin-top: 10rem;
+    color: #057389;
+    width: 100%;
+    text-align: center;
+    font-family: "Fira", sans-serif;
+}
+
+.header{
+    text-align: center;
+    margin-bottom: 10rem;
+}
+
+.content{
+    font-size: 2rem;
+    margin-bottom: auto;
+}

@@ -1,7 +1,12 @@
+import { Fragment } from "react";
+import AboutContent from "../../components/About/AboutContent";
+
 const AboutPage = () => {
-    return (
-        <h1>This is about page</h1>
-    )
-}
+  return (
+    <Fragment>
+      <AboutContent />
+    </Fragment>
+  );
+};
 
 export default AboutPage;
