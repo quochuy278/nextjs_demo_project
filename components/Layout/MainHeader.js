@@ -6,14 +6,14 @@ const MainHeader = () => {
   return (
     <header className={styles.header}>
       <div className={styles.logo}>
-        <Link href="/">NextJs Restaurant</Link>
+        <Link href="/">NextJs Blog</Link>
       </div>
 
       <nav className={styles.navigation}>
         <div>
           <ul>
             <li>
-              <Link href="/menu">Menu</Link>
+              <Link href="/menu">All Blogs</Link>
             </li>
             <li>
               <Link href="/about">About us</Link>

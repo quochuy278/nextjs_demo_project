@@ -11,36 +11,53 @@ import LockOutlinedIcon from "@mui/icons-material/LockOutlined";
 import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
-import { styled } from '@mui/material/styles';
+import { styled } from "@mui/material/styles";
+import axios from 'axios'
+import { useRouter } from "next/router";
 
 const theme = createTheme();
-const CssTextField = styled(TextField)({
-    '& label.Mui-focused': {
-      color: '#d29681',
+const CssTextField = styled(TextField)({  
+  "& label.Mui-focused": {
+    color: "#d29681",
+  },
+  "& .MuiInput-underline:after": {
+    borderBottomColor: "green",
+  },
+  "& .MuiOutlinedInput-root": {
+    "&:hover fieldset": {
+      borderColor: "#efcfd0",
     },
-    '& .MuiInput-underline:after': {
-      borderBottomColor: 'green',
+    "&.Mui-focused fieldset": {
+      borderColor: "#d29681",
     },
-    '& .MuiOutlinedInput-root': {
-      
-      '&:hover fieldset': {
-        borderColor: '#efcfd0',
-      },
-      '&.Mui-focused fieldset': {
-        borderColor: '#d29681',
-      },
-    },
-  });
+  },
+});
 const stylesColor = { color: "#d29681" };
 export default function LoginForm() {
+  const route = useRouter()
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     // eslint-disable-next-line no-console
-    console.log({
-      email: data.get("email"),
-      password: data.get("password"),
-    });
+    const enteredEmail = data.get("email");
+    const enteredPassword = data.get("password");
+    console.log(enteredEmail, enteredPassword);
+    axios({
+      method: 'post',
+      url: `http://localhost:3000/api/login`,
+      data: {
+        email: enteredEmail,
+        password: enteredPassword,
+      },
+    })
+      .then((res) => {
+        console.log(res.data);
+        route.push('/')
+      })
+      .catch((err) => {
+        console.log(err)
+      })
+    
   };
 
   return (
