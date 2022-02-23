@@ -12,11 +12,11 @@ import Typography from "@mui/material/Typography";
 import Container from "@mui/material/Container";
 import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { styled } from "@mui/material/styles";
-import axios from 'axios'
 import { useRouter } from "next/router";
+import { signIn } from "next-auth/client";
 
 const theme = createTheme();
-const CssTextField = styled(TextField)({  
+const CssTextField = styled(TextField)({
   "& label.Mui-focused": {
     color: "#d29681",
   },
@@ -34,30 +34,23 @@ const CssTextField = styled(TextField)({
 });
 const stylesColor = { color: "#d29681" };
 export default function LoginForm() {
-  const route = useRouter()
-  const handleSubmit = (event) => {
+  const router = useRouter();
+
+  const handleSubmit = async (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
     // eslint-disable-next-line no-console
     const enteredEmail = data.get("email");
     const enteredPassword = data.get("password");
     console.log(enteredEmail, enteredPassword);
-    axios({
-      method: 'post',
-      url: `http://localhost:3000/api/login`,
-      data: {
-        email: enteredEmail,
-        password: enteredPassword,
-      },
-    })
-      .then((res) => {
-        console.log(res.data);
-        route.push('/')
-      })
-      .catch((err) => {
-        console.log(err)
-      })
-    
+    const result = await signIn("credentials", {
+      redirect: false,
+      email: enteredEmail,
+      password: enteredPassword,
+    });
+    if (!result.error) {
+      router.replace("/blogs");
+    }
   };
 
   return (

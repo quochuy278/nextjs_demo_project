@@ -53,3 +53,8 @@
 .formLink ul li .active {
   color: #efcfd0;
 }
+
+.icon{
+  cursor: pointer;
+}
+

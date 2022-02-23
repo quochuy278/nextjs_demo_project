@@ -2,7 +2,7 @@ import Image from "next/image";
 import { Fragment } from "react";
 import Button from "../ui/button";
 
-const MainComponent = () => {
+const AllBlogs = () => {
   return (
     <Fragment>
       <div
@@ -31,4 +31,4 @@ const MainComponent = () => {
   );
 };
 
-export default MainComponent;
+export default AllBlogs;

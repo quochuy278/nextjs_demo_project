@@ -1,6 +1,8 @@
 import Link from "next/link";
 import Button from "../ui/button";
 import styles from "./main-header.module.css";
+import { Menu } from "@mui/material";
+import PersonIcon from "@mui/icons-material/Person";
 
 const MainHeader = () => {
   return (
@@ -32,6 +34,21 @@ const MainHeader = () => {
           </li>
           <li>
             <Link href="/signup">Sign up</Link>
+          </li>
+          <li>
+            <PersonIcon className={styles.icon} />
+            <ul className="dropdown">
+              <li>Welcome Huy</li>
+              <li>
+                <a href="#">MyBlog</a>
+              </li>
+              <li>
+                <a href="#">Profile</a>
+              </li>
+              <li>
+                <a href="#">Logout</a>
+              </li>
+            </ul>
           </li>
         </ul>
       </div>
