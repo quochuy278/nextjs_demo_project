@@ -49,7 +49,7 @@ const BlogItem = (props) => {
         </div>
         <Link href={exploreLink}>
           
-          <a class={styles.btn_primary} href={exploreLink}>
+          <a className={styles.btn_primary} href={exploreLink}>
             Read More
           </a>
         </Link>
