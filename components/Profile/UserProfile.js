@@ -48,8 +48,8 @@ const UserProfile = () => {
               </div>
 
               <div className="buttons">
-                <Button class="btn btn-outline-primary px-4">Message</Button>
-                <Button className="btn btn-primary px-4 ms-3">Contact</Button>
+                <Button>Message</Button>
+                <Button>Contact</Button>
               </div>
             </div>
           </div>
