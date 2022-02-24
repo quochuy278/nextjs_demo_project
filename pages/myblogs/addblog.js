@@ -14,6 +14,8 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { styled } from "@mui/material/styles";
 import { useRouter } from "next/router";
 import { signIn } from "next-auth/client";
+import { TextareaAutosize } from "@mui/material";
+import { height } from "@mui/system";
 
 const theme = createTheme();
 const CssTextField = styled(TextField)({
@@ -32,26 +34,35 @@ const CssTextField = styled(TextField)({
     },
   },
 });
+
+const CssTextareaAutosize = styled(TextareaAutosize)({
+    "& label.Mui-focused": {
+      color: "#d29681",
+    },
+    "& .MuiInput-underline:after": {
+      borderBottomColor: "green",
+    },
+    "& .MuiOutlinedInput-root": {
+      "&:hover fieldset": {
+        borderColor: "#efcfd0",
+      },
+      "&.Mui-focused fieldset": {
+        borderColor: "#d29681",
+      },
+    },
+  });
+
 const stylesColor = { color: "#d29681" };
-export default function LoginForm() {
+export default function AddBlog() {
   const router = useRouter();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
-    // eslint-disable-next-line no-console
-    const enteredEmail = data.get("email");
-    const enteredPassword = data.get("password");
-    console.log(enteredEmail, enteredPassword);
-    const result = await signIn("credentials", {
-      redirect: false,
-      email: enteredEmail,
-      password: enteredPassword,
-    });
+    const enteredTitle = data.get("title");
+    const enteredBlog = data.get("blog");
+    console.log(enteredTitle, enteredBlog)
     
-    if (!result.error) {
-      router.replace("/myblogs");
-    }
   };
 
   return (
@@ -81,7 +92,7 @@ export default function LoginForm() {
               color: "#057389",
             }}
           >
-            Sign in
+           Add Your Blog Here
           </Typography>
           <Box
             component="form"
@@ -93,27 +104,25 @@ export default function LoginForm() {
               margin="normal"
               required
               fullWidth
-              id="email"
-              label="Email Address"
-              name="email"
-              autoComplete="email"
+              id="title"
+              label="Title"
+              name="title"
+              autoComplete="title"
               autoFocus
             />
-            <CssTextField
+             <CssTextareaAutosize
               margin="normal"
               required
               fullWidth
-              name="password"
-              label="Password"
-              type="password"
-              id="password"
-              autoComplete="current-password"
-            />
-            <FormControlLabel
-              control={<Checkbox value="remember" style={stylesColor} />}
-              label="Remember me"
+              id="blog"
+              label="Blog"
+              name="blog"
+             placeholder="Your Blog Here"
+              autoFocus
               style={{
-                color: stylesColor.color,
+                width: "30rem",
+                marginTop: '10px',
+                height: '40rem'
               }}
             />
             <Button
@@ -126,20 +135,8 @@ export default function LoginForm() {
                 color: "#057389",
               }}
             >
-              Sign In
+              Add Blog
             </Button>
-            <Grid container>
-              <Grid item xs>
-                <Link href="#" variant="body2" style={stylesColor}>
-                  Forgot password?
-                </Link>
-              </Grid>
-              <Grid item>
-                <Link href="/signup" variant="body2" style={stylesColor}>
-                  {"Don't have an account? Sign Up"}
-                </Link>
-              </Grid>
-            </Grid>
           </Box>
         </Box>
       </Container>

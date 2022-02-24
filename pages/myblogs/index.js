@@ -1,7 +1,9 @@
+import { getSession } from "next-auth/client";
+import Link from "next/link";
 import { Fragment } from "react";
-
-import BlogList from "../components/Blog/BlogList";
-import styles from "../styles/Home.module.css";
+import BlogList from "../../components/Blog/BlogList";
+import Button from "../../components/ui/button";
+import styles from "./index.module.css";
 
 const DUMMY_BLOGS = [
   {
@@ -27,12 +29,35 @@ const DUMMY_BLOGS = [
   },
 ];
 
-const Home = () => {
+const BlogPage = () => {
   return (
     <Fragment>
-      <BlogList blogs={DUMMY_BLOGS}/>
+      <BlogList myBlogs={DUMMY_BLOGS} />
+      <div className={styles.btn}>
+        <Button>
+          <Link href="/myblogs/addblog">Add blogs</Link>
+        </Button>
+      </div>
     </Fragment>
   );
 };
 
-export default Home;
+export default BlogPage;
+
+export const getServerSideProps = async (context) => {
+  const session = await getSession({ req: context.req });
+  console.log(session);
+
+  if (!session) {
+    sessionEmail = null;
+    return {
+      redirect: {
+        destination: "/login",
+        permanent: false,
+      },
+    };
+  }
+  return {
+    props: { session },
+  };
+};

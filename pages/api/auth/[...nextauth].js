@@ -42,7 +42,7 @@ export default NextAuth({
         client.close();
 
         return {
-          emai: user.emai,
+          email: user.email,
           firstName: user.firstName,
           lastName: user.lastName,
         };
