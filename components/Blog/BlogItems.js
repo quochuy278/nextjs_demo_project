@@ -34,15 +34,15 @@ const BlogItem = (props) => {
             </Button>
           </div>
         </div> */}
-      <div class={styles.blog_post}>
-        <div class={styles.img_pod}>
+      <div className={styles.blog_post}>
+        <div className={styles.img_pod}>
           <img
             className={styles.content_img}
             src="https://pbs.twimg.com/profile_images/890901007387025408/oztASP4n.jpg"
             alt={author}
           />
         </div>
-        <div class={styles.container_copy}>
+        <div className={styles.container_copy}>
           <h3 className={styles.h3_content}>{humanReadableDate}</h3>
           <h1 className={styles.h1_content}>{title}</h1>
           <p className={styles.p_content}>{blog}</p>
