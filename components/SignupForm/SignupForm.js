@@ -53,7 +53,7 @@ export default function SignupForm() {
     });
     axios({
       method: "post",
-      url: `http://localhost:3000/api/signup`,
+      url: `http://localhost:3000/api/auth/signup`,
       data: {
         email: enteredEmail,
         password: enteredPassword,
@@ -63,7 +63,7 @@ export default function SignupForm() {
     })
       .then((res) => {
         console.log(res.data);
-        route.push('/login')
+        
       })
       .catch((err) => {
         console.log(err);

@@ -1,3 +1,7 @@
+.header header{
+  width: 100%;
+}
+
 .header {
   width: 100%;
   display: flex;
@@ -6,6 +10,7 @@
   padding: 1rem 5%;
   height: 5rem;
   background-color: #d29681;
+  text-align: center;
 }
 
 .logo {
@@ -34,6 +39,7 @@
   text-align: center;
   color: #057389;
   font-family: "Fira", sans-serif;
+  text-decoration: none;
 }
 .navigation ul li:hover,
 .navigation ul li .active {
@@ -42,9 +48,9 @@
 
 .formLink ul li {
   display: inline-block;
-  margin-left: 10px;
-  margin-right: 10px;
-  padding: 0 10px 10px 0;
+  margin-left: 30px;
+  margin-right: 30px;
+  
   text-align: center;
   color: #057389;
   font-family: "Fira", sans-serif;
@@ -53,3 +59,10 @@
 .formLink ul li .active {
   color: #efcfd0;
 }
+
+.icon{
+  cursor: pointer;
+}
+
+
+
