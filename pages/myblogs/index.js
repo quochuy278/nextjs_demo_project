@@ -46,7 +46,7 @@ export default BlogPage;
 
 export const getServerSideProps = async (context) => {
   const session = await getSession({ req: context.req });
-  console.log(session);
+ 
 
   if (!session) {
     sessionEmail = null;

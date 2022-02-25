@@ -11,7 +11,7 @@ const UserProfile = () => {
           <div className={styles.card}>
             <div className={styles.imageWrapper}>
               <img
-                src="https://i.imgur.com/bDLhJiP.jpg"
+                src="/img/HuyBui_profile.png"
                 width="100"
                 className={styles.img_content}
               />

@@ -1,1 +1,4 @@
 MONGO_URL="mongodb+srv://huy1234:huy123@cluster0.pfd53.mongodb.net/myFirstDatabase?retryWrites=true&w=majority"
+DB_NAME= "sample_posts"
+
+DEV_URL = "http://localhost:3000"

@@ -42,7 +42,7 @@ export default function LoginForm() {
     // eslint-disable-next-line no-console
     const enteredEmail = data.get("email");
     const enteredPassword = data.get("password");
-    console.log(enteredEmail, enteredPassword);
+    
     const result = await signIn("credentials", {
       redirect: false,
       email: enteredEmail,
