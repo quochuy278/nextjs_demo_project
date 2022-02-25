@@ -10,11 +10,15 @@ import IconButton from "@mui/material/IconButton";
 import Avatar from "@mui/material/Avatar";
 import { signOut, useSession } from "next-auth/client";
 import { Divider } from "@mui/material";
+import { useContext } from "react";
+import AuthContext from "../../store/auth-context";
 
 const MainHeader = () => {
+  const authCtx = useContext(AuthContext)
   const [session, loading] = useSession();
   const [anchorElUser, setAnchorElUser] = React.useState(null);
-
+  
+  
   
   const handleOpenUserMenu = (event) => {
     setAnchorElUser(event.currentTarget);
@@ -85,7 +89,7 @@ const MainHeader = () => {
                   onClose={handleCloseUserMenu}
                 >
                   <MenuItem onClick={handleCloseUserMenu}>
-                    <Typography textAlign="center"> Welcome Huy</Typography>
+                    <Typography textAlign="center"> Welcome {session.user.email}</Typography>
                   </MenuItem>
                   <Divider />
                   <MenuItem onClick={handleCloseUserMenu}>

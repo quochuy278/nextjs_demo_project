@@ -3,15 +3,15 @@ import Button from "../ui/button";
 import Link from "next/link";
 
 const BlogItem = (props) => {
-  const { title, author, date, blog, id } = props;
-
+  const { title, author, date, blog, _id } = props;
+  console.log(date)
   const humanReadableDate = new Date(date).toLocaleDateString("en-US", {
     day: "numeric",
     month: "long",
     year: "numeric",
   });
 
-  const exploreLink = `/blogs/${id}`;
+  const exploreLink = `/blogs/${_id}`;
 
   return (
     <li className={styles.item}>

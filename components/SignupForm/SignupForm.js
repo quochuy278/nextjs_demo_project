@@ -45,12 +45,7 @@ export default function SignupForm() {
     const enteredPassword = data.get("password");
     const enteredFirstName = data.get("firstName");
     const enteredLastName = data.get("lastName");
-    console.log({
-      emaiL: enteredEmail,
-      password: enteredPassword,
-      lastName: enteredLastName,
-      firstName: enteredFirstName,
-    });
+   
     axios({
       method: "post",
       url: `http://localhost:3000/api/auth/signup`,
@@ -63,6 +58,11 @@ export default function SignupForm() {
     })
       .then((res) => {
         console.log(res.data);
+        const {message} = res.data
+        console.log(message)
+        if (message == 'Created user!'){
+          router.replace('/')
+        }
         
       })
       .catch((err) => {
