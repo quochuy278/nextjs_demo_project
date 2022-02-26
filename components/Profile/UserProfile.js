@@ -11,7 +11,7 @@ const UserProfile = () => {
           <div className={styles.card}>
             <div className={styles.imageWrapper}>
               <img
-                src="/img/HuyBui_profile.png"
+                src=""
                 width="100"
                 className={styles.img_content}
               />

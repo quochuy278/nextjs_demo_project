@@ -1,4 +1,3 @@
-
 import { connectToDatabase } from "../../../lib/db";
 
 const handler = async (req, res) => {
@@ -6,11 +5,13 @@ const handler = async (req, res) => {
     const client = await connectToDatabase();
 
     const db = client.db();
-    const blogs = await db.collection('blogs').find({})
-    .sort({ published: -1 })
-    .toArray();
+    const blogs = await db
+      .collection("blogs")
+      .find({})
+      .sort({ published: -1 })
+      .toArray();
     res.json({
-        data: JSON.parse(JSON.stringify(blogs)),
+      data: JSON.parse(JSON.stringify(blogs)),
     });
   } else if (req.method === "POST") {
     const title = req.body.title;
@@ -37,15 +38,13 @@ const handler = async (req, res) => {
         author: author,
         lastName: lastName,
         firstName: firstName,
-        lastModifed: lastModifed
+        lastModifed: lastModifed,
       },
       { Timestamp: true }
     );
 
     res.status(201).json({ message: "Created blog!" });
     client.close();
-  } else if (req.method === "PUT") {
-  } else if (req.method === "DELETE") {
   }
 };
 
