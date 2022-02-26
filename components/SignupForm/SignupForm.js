@@ -57,9 +57,10 @@ export default function SignupForm() {
       },
     })
       .then((res) => {
-        console.log(res.data);
+        // console.log(res.data);
+        // console.log(message)
         const {message} = res.data
-        console.log(message)
+     
         if (message == 'Created user!'){
           router.replace('/')
         }

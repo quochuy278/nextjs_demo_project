@@ -3,20 +3,19 @@ import styles from "./BlogList.module.css";
 
 const BlogList = (props) => {
   
-  let filteredBlogs ;
-  
-  if (!props.blogs){
-      filteredBlogs = props.myBlogs
+  const {blogs , editMode} = props
+  let editModification;
+  if (!editMode){
+    editModification = false
   }
   else {
-    filteredBlogs = props.blogs
+    editModification =true
   }
- 
   
 
   return (
     <ul className={styles.list}>
-      {filteredBlogs.map((blog) => (
+      {blogs.map((blog) => (
         <BlogItem
           key={blog._id}
           id={blog._id}
@@ -24,6 +23,7 @@ const BlogList = (props) => {
           author={blog.author}
           date={blog.lastModifed}
           blog={blog.blog}
+          editMode={editModification}
         />
       ))}
     </ul>
