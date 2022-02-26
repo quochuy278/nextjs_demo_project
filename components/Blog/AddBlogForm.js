@@ -59,14 +59,14 @@ export default function AddBlogForm(props) {
   if (!props.userData) {
     return <LoadingSpinner />;
   }
-  console.log();
+  
   // const {lastName, firstName, email} = props.useData.users
-  console.log(props.userData);
-  console.log({
-    lastName: props.userData.users.lastName,
-    firstName: props.userData.users.firstName,
-    email: props.userData.users.email,
-  });
+  // console.log(props.userData);
+  // console.log({
+  //   lastName: props.userData.users.lastName,
+  //   firstName: props.userData.users.firstName,
+  //   email: props.userData.users.email,
+  // });
   const { lastName, firstName, email } = props.userData.users;
 
   const handleSubmit = async (event) => {
@@ -96,9 +96,10 @@ export default function AddBlogForm(props) {
       },
     })
       .then((res) => {
-        console.log(res.data);
+        // console.log(res.data);
+        // console.log(message);
         const { message } = res.data;
-        console.log(message);
+        
         setIsloading(true);
         if (message == "Created blog!") {
           router.replace("/");

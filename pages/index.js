@@ -6,7 +6,7 @@ import LoadingSpinner from "../components/ui/loadingspinner";
 import styles from "../styles/Home.module.css";
 
 const Home = (props) => {
-  console.log(props.data);
+  
   // const [data,setData] =  useState()
   // useEffect(() => {
   //   const url = "http://localhost:3000/api/blogs";
@@ -17,7 +17,7 @@ const Home = (props) => {
   // }, [])
 
   const allBlogs = props.data.data;
-  console.log(allBlogs);
+  
   if (!allBlogs) {
     return <LoadingSpinner />;
   }

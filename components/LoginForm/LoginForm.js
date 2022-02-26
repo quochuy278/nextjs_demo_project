@@ -52,7 +52,7 @@ export default function LoginForm() {
       password: enteredPassword,
     });
     setIsloading(true);
-    console.log(result);
+    // console.log(result);
     if (!result.error) {
       router.replace("/myblogs");
     }
