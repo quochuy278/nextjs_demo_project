@@ -4,7 +4,7 @@ import Link from "next/link";
 import Image from "next/image";
 
 const BlogItem = (props) => {
-  const { title, author, date, blog, id, editModification } = props;
+  const { title, author, date, blog, id, editMode } = props;
   // console.log(props);
   const humanReadableDate = new Date(date).toLocaleDateString("en-US", {
     day: "numeric",
@@ -13,7 +13,9 @@ const BlogItem = (props) => {
   });
 
   const exploreLink = `/myblogs/${id}`;
-  console.log(props.editMode);
+  const editLink = `/myblogs/${id}/edit`;
+
+  console.log(editMode);
   return (
     <li className={styles.item}>
       <div className={styles.blog_post}>
@@ -31,15 +33,11 @@ const BlogItem = (props) => {
           <p className={styles.p_content}>{blog}</p>
         </div>
         <Link href={exploreLink}>
-          <a className={styles.btn_primary} href={exploreLink}>
-            Read More
-          </a>
+          <a className={styles.btn_primary}>Read More</a>
         </Link>
-        {editModification && (
-          <Link href={"#"}>
-            <a className={styles.btn_primary} href={"#"}>
-              Edit here
-            </a>
+        {editMode && (
+          <Link href={editLink}>
+            <a className={styles.btn_primary}>Edit here</a>
           </Link>
         )}
       </div>
