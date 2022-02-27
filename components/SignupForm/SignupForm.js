@@ -36,7 +36,7 @@ const CssTextField = styled(TextField)({
 });
 const stylesColor = { color: "#d29681" };
 export default function SignupForm() {
-  const route = useRouter()
+  const router = useRouter()
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -62,7 +62,7 @@ export default function SignupForm() {
         const {message} = res.data
      
         if (message == 'Created user!'){
-          router.replace('/')
+          router.replace('/login')
         }
         
       })

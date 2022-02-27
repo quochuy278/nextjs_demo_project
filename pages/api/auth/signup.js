@@ -7,12 +7,6 @@ const handler = async (req, res) => {
   }
 
   const { firstName, lastName, email, password } = req.body;
-  console.log({
-    emaiL: email,
-    password: password,
-    lastName: lastName,
-    firstName: firstName,
-  });
 
   if (!firstName || !lastName) {
     res.json({
@@ -33,20 +27,10 @@ const handler = async (req, res) => {
     return;
   }
 
-  try {
-    const client = await connectToDatabase();
-    
-  }
-  catch(error) {
-    res.json({
-      message:
-        "Connecting to database failed.",
-    });
-   
-    return;
-  }
+  const client = await connectToDatabase();
+
   const db = client.db();
-  
+
   const existingUser = await db.collection("users").findOne({ email: email });
 
   if (existingUser) {
@@ -64,13 +48,11 @@ const handler = async (req, res) => {
       lastName: lastName,
       firstName: firstName,
     });
-  } catch(error) {
-    res.json({ message: 'Something wrong happened' });
+  } catch (error) {
+    res.json({ message: "Something wrong happened" });
     client.close();
     return;
-  } 
-
- 
+  }
 
   res.status(201).json({ message: "Created user!" });
   client.close();

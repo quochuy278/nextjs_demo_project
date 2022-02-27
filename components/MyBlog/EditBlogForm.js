@@ -14,6 +14,7 @@ import { TextareaAutosize } from "@mui/material";
 import axios from "axios";
 import LoadingSpinner from "../ui/loadingspinner";
 import { useState, Fragment } from "react";
+import FormDelete from "./FormDelete";
 
 const theme = createTheme();
 const CssTextField = styled(TextField)({
@@ -79,7 +80,7 @@ export default function EditBlogForm(props) {
       month: "long",
       year: "numeric",
     });
-    console.log(humanReadableDate);
+    
     axios({
       method: "PUT",
       url: `http://localhost:3000/api/blogs/${_id}`,
@@ -106,9 +107,30 @@ export default function EditBlogForm(props) {
     setIsloading(false);
   };
 
-  const deleteSubmitHandler  = (event) => {
-    event.preventDefault()
-  }
+  const deleteSubmitHandler = (event) => {
+    event.preventDefault();
+    axios({
+      method: "DELETE",
+      url: `http://localhost:3000/api/blogs/${_id}`,
+      data: {
+        ...props.blog[0],
+      },
+    })
+      .then((res) => {
+        // console.log(res.data);
+        // console.log(message);
+        const { message } = res.data;
+        console.log(res.data);
+        setIsloading(true);
+        if (message == "Deleted successfully!") {
+          router.replace("/");
+          setIsloading(false);
+        }
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
   return (
     <Fragment>
       {isLoading && <LoadingSpinner />}
@@ -184,28 +206,16 @@ export default function EditBlogForm(props) {
                     color: "#057389",
                   }}
                 >
-                  Add Blog
+                  Edit blog
                 </Button>
-                <Box
-                  component="form"
-                  onSubmit={deleteSubmitHandler}
-                  noValidate
-                  sx={{ mt: 1 }}
-                >
-                  <Button
-                    type="submit"
-                    fullWidth
-                    variant="contained"
-                    sx={{ mt: 3, mb: 2 }}
-                    style={{
-                      backgroundColor: "#d29681",
-                      color: "#057389",
-                    }}
-                  >
-                    Delete Blog
-                  </Button>
-                </Box>
+               
               </Box>
+              <Box noValidate
+                sx={{ mt: 1 }}
+                maxWidth="xs">
+              <FormDelete onDelete={deleteSubmitHandler}/>
+              </Box>
+             
             </Box>
           </Container>
         </ThemeProvider>

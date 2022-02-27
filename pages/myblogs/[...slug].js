@@ -1,7 +1,7 @@
 import EditBlogForm from "../../components/MyBlog/EditBlogForm";
 
 const EditPage = (props) => {
-    console.log(props.data)
+    
     const blogData = props.data.data
     const blog = Object.assign({}, blogData)
   
@@ -12,7 +12,7 @@ export default EditPage;
 
 export const getServerSideProps = async (context) => {
   const id = context.query.slug[0];
-  console.log(id);
+  
   const url = `http://localhost:3000/api/blogs/${id}`;
   const result = await fetch(url, {
     headers: {
