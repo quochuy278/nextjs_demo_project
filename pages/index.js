@@ -7,17 +7,9 @@ import styles from "../styles/Home.module.css";
 
 const Home = (props) => {
   
-  // const [data,setData] =  useState()
-  // useEffect(() => {
-  //   const url = "http://localhost:3000/api/blogs";
-  //   const result =await axios(url)
-  //   const data = await result.json();
-
-  //   setData(data)
-  // }, [])
-
+ 
   const allBlogs = props.data.data;
-  
+   
   if (!allBlogs) {
     return <LoadingSpinner />;
   }
