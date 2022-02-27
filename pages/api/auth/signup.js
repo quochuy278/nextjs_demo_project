@@ -7,13 +7,7 @@ const handler = async (req, res) => {
   }
 
   const { firstName, lastName, email, password } = req.body;
-  console.log({
-    emaiL: email,
-    password: password,
-    lastName: lastName,
-    firstName: firstName,
-  });
-
+ 
   if (!firstName || !lastName) {
     res.json({
       message: "Please fill out the first name and last name",

@@ -14,8 +14,7 @@ const BlogPage = (props) => {
   
   const {data} = props.data
   let filteredData = data.filter( blog => blog.author === userEmail )
-  // console.log(filteredData)
-  // console.log(userEmail)
+  
   let editable;
   if(!filteredData){
     <LoadingSpinner/>
