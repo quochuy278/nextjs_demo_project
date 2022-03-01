@@ -5,7 +5,7 @@ import { useEffect, useState } from "react";
 const AddBlogPage = (props) => {
   const [userData, setUsetdata] = useState();
   useEffect(async () => {
-    const response = await fetch("http://localhost:3000/api/auth/user");
+    const response = await fetch(`${process.env.url}api/auth/user`);
     const data = await response.json();
     setUsetdata(data);
   }, []);
