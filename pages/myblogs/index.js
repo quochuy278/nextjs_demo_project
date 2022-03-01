@@ -42,7 +42,9 @@ export default BlogPage;
 export const getServerSideProps = async (context) => {
   const session = await getSession({ req: context.req });
 
-  const url = "http://localhost:3000/api/blogs";
+  const url = `${process.env.url}api/blogs`;
+  
+  
   const result = await fetch(url, {
     headers: {
       // update with your user-agent

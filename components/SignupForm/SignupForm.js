@@ -1,4 +1,3 @@
-import * as React from "react";
 import Avatar from "@mui/material/Avatar";
 import Button from "@mui/material/Button";
 import CssBaseline from "@mui/material/CssBaseline";
@@ -15,6 +14,9 @@ import { createTheme, ThemeProvider } from "@mui/material/styles";
 import { styled } from "@mui/material/styles";
 import axios from "axios";
 import { useRouter } from "next/router";
+import Notification from "../ui/notification";
+import { Fragment, useState } from "react";
+import LoadingSpinner from "../ui/loadingspinner";
 
 const theme = createTheme();
 
@@ -36,7 +38,10 @@ const CssTextField = styled(TextField)({
 });
 const stylesColor = { color: "#d29681" };
 export default function SignupForm() {
-  const router = useRouter()
+  const router = useRouter();
+  const [error, setError] = useState();
+  const [status, setStatus] = useState();
+  const [loading, setLoading] = useState(false);
   const handleSubmit = (event) => {
     event.preventDefault();
     const data = new FormData(event.currentTarget);
@@ -45,10 +50,12 @@ export default function SignupForm() {
     const enteredPassword = data.get("password");
     const enteredFirstName = data.get("firstName");
     const enteredLastName = data.get("lastName");
-   
+    if (!error){
+      setError('Loading')
+    }
     axios({
       method: "post",
-      url: `http://localhost:3000/api/auth/signup`,
+      url: `${process.env.url}api/auth/signup`,
       data: {
         email: enteredEmail,
         password: enteredPassword,
@@ -57,130 +64,159 @@ export default function SignupForm() {
       },
     })
       .then((res) => {
-        // console.log(res.data);
+        console.log(res.data);
         // console.log(message)
-        const {message} = res.data
-     
-        if (message == 'Created user!'){
-          router.replace('/login')
+        const { message } = res.data;
+
+        if (message == "Created user!") {
+          
+          setLoading(true);
+          router.replace("/login");
+        } else {
+          setStatus("error");
+          setError(message);
+          setLoading(false);
         }
-        
       })
       .catch((err) => {
         console.log(err);
       });
   };
-
+  console.log(error)
   return (
-    <ThemeProvider theme={theme}>
-      <Container component="main" maxWidth="xs">
-        <CssBaseline />
-        <Box
-          sx={{
-            marginTop: 8,
-            display: "flex",
-            flexDirection: "column",
-            alignItems: "center",
-          }}
-        >
-          <Avatar
-            sx={{ m: 1 }}
-            style={{
-              backgroundColor: "#d29681",
-            }}
-          >
-            <LockOutlinedIcon />
-          </Avatar>
-          <Typography
-            component="h1"
-            variant="h5"
-            style={{
-              color: "#057389",
-            }}
-          >
-            Sign up
-          </Typography>
-          <Box
-            component="form"
-            noValidate
-            onSubmit={handleSubmit}
-            sx={{ mt: 3 }}
-          >
-            <Grid container spacing={2}>
-              <Grid item xs={12} sm={6}>
-                <CssTextField
-                  autoComplete="given-name"
-                  name="firstName"
-                  required
-                  fullWidth
-                  id="firstName"
-                  label="First Name"
-                  autoFocus
-                />
-              </Grid>
-              <Grid item xs={12} sm={6}>
-                <CssTextField
-                  required
-                  fullWidth
-                  id="lastName"
-                  label="Last Name"
-                  name="lastName"
-                  autoComplete="family-name"
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <CssTextField
-                  required
-                  fullWidth
-                  id="email"
-                  label="Email Address"
-                  name="email"
-                  autoComplete="email"
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <CssTextField
-                  required
-                  fullWidth
-                  name="password"
-                  label="Password"
-                  type="password"
-                  id="password"
-                  autoComplete="new-password"
-                />
-              </Grid>
-              <Grid item xs={12}>
-                <FormControlLabel
-                  control={
-                    <Checkbox value="allowExtraEmails" style={stylesColor} />
-                  }
-                  label="I want to receive inspiration, marketing promotions and updates via email."
-                  style={stylesColor}
-                />
-              </Grid>
-            </Grid>
-            <Button
-              type="submit"
-              fullWidth
-              variant="contained"
-              sx={{ mt: 3, mb: 2 }}
-              style={{
-                backgroundColor: "#d29681",
-                color: "#057389",
+    <Fragment>
+      {loading && <LoadingSpinner />}
+      {!loading && (
+        <ThemeProvider theme={theme}>
+          <Container component="main" maxWidth="xs">
+            <CssBaseline />
+            <Box
+              sx={{
+                marginTop: 8,
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
               }}
             >
-              Sign Up
-            </Button>
-            <Grid container justifyContent="flex-end">
-              <Grid item>
-                <Link href="/login" variant="body2" style={stylesColor}>
-                  Already have an account? Sign in
-                </Link>
-              </Grid>
-            </Grid>
-          </Box>
-        </Box>
-      </Container>
-    </ThemeProvider>
+              <Avatar
+                sx={{ m: 1 }}
+                style={{
+                  backgroundColor: "#d29681",
+                }}
+              >
+                <LockOutlinedIcon />
+              </Avatar>
+              <Typography
+                component="h1"
+                variant="h5"
+                style={{
+                  color: "#057389",
+                }}
+              >
+                Sign up
+              </Typography>
+              <Box
+                component="form"
+                noValidate
+                onSubmit={handleSubmit}
+                sx={{ mt: 3 }}
+              >
+                <Grid container spacing={2}>
+                  <Grid item xs={12} sm={6}>
+                    <CssTextField
+                      autoComplete="given-name"
+                      name="firstName"
+                      required
+                      fullWidth
+                      id="firstName"
+                      label="First Name"
+                      autoFocus
+                    />
+                  </Grid>
+                  <Grid item xs={12} sm={6}>
+                    <CssTextField
+                      required
+                      fullWidth
+                      id="lastName"
+                      label="Last Name"
+                      name="lastName"
+                      autoComplete="family-name"
+                    />
+                  </Grid>
+                  <Grid item xs={12}>
+                    <CssTextField
+                      required
+                      fullWidth
+                      id="email"
+                      label="Email Address"
+                      name="email"
+                      autoComplete="email"
+                    />
+                  </Grid>
+                  <Grid item xs={12}>
+                    <CssTextField
+                      required
+                      fullWidth
+                      name="password"
+                      label="Password"
+                      type="password"
+                      id="password"
+                      autoComplete="new-password"
+                    />
+                  </Grid>
+                  <Grid item xs={12}>
+                    <FormControlLabel
+                      control={
+                        <Checkbox
+                          value="allowExtraEmails"
+                          style={stylesColor}
+                        />
+                      }
+                      label="I want to receive inspiration, marketing promotions and updates via email."
+                      style={stylesColor}
+                    />
+                  </Grid>
+                </Grid>
+                <Button
+                  type="submit"
+                  fullWidth
+                  variant="contained"
+                  sx={{ mt: 3, mb: 2 }}
+                  style={{
+                    backgroundColor: "#d29681",
+                    color: "#057389",
+                  }}
+                >
+                  Sign Up
+                </Button>
+                <Grid container justifyContent="flex-end">
+                  <Grid item>
+                    <Link href="/login" variant="body2" style={stylesColor}>
+                      Already have an account? Sign in
+                    </Link>
+                  </Grid>
+                </Grid>
+                <Grid
+                  item
+                  xs={12}
+                  style={{
+                    paddingTop: "30px",
+                  }}
+                >
+                
+                </Grid>
+              </Box>
+            </Box>
+          </Container>
+        </ThemeProvider>
+      )}
+      {error && (
+        <ThemeProvider theme={theme}>
+        <Container component="main" maxWidth="xs">
+        <Notification status={status} message={error} />
+        </Container>
+        </ThemeProvider>
+      )}
+    </Fragment>
   );
 }
