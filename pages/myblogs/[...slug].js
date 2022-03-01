@@ -13,7 +13,8 @@ export default EditPage;
 export const getServerSideProps = async (context) => {
   const id = context.query.slug[0];
   
-  const url = `http://localhost:3000/api/blogs/${id}`;
+  const url = `${process.env.url}api/blogs/${id}`;
+  
   const result = await fetch(url, {
     headers: {
       // update with your user-agent

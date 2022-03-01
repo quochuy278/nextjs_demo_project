@@ -83,7 +83,7 @@ export default function EditBlogForm(props) {
     
     axios({
       method: "PUT",
-      url: `http://localhost:3000/api/blogs/${_id}`,
+      url: `${process.env.url}api/blogs/${_id}`,
       data: {
         ...props.blog[0],
         title: enteredTitle,
@@ -111,7 +111,7 @@ export default function EditBlogForm(props) {
     event.preventDefault();
     axios({
       method: "DELETE",
-      url: `http://localhost:3000/api/blogs/${_id}`,
+      url: `${process.env.url}api/blogs/${_id}`,
       data: {
         ...props.blog[0],
       },

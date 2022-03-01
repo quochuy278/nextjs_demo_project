@@ -9,9 +9,12 @@ const Home = (props) => {
   
  
   const allBlogs = props.data.data;
-   
+  console.log(process.env.url)
   if (!allBlogs) {
     return <LoadingSpinner />;
+  } else if (props.data.length == 0 || allBlogs.length === 0 ) {
+    return <p> No blog yet</p>
+    
   }
   return (
     <Fragment>
@@ -23,7 +26,7 @@ const Home = (props) => {
 export default Home;
 
 export const getServerSideProps = async (context) => {
-  const url = "http://localhost:3000/api/blogs";
+  const url = `${process.env.url}api/blogs`;
 
   const result = await fetch(url, {
     headers: {

@@ -85,7 +85,7 @@ export default function AddBlogForm(props) {
     console.log(humanReadableDate);
     axios({
       method: "post",
-      url: `http://localhost:3000/api/blogs`,
+      url: `${process.env.url}api/blogs`,
       data: {
         title: enteredTitle,
         blog: enteredBlog,
